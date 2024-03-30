@@ -1,11 +1,18 @@
 package com.shopstream.model;
 
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "payment_information")
 public class PaymentInformation {
-    @Column(name = "cardHolder_name")
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
+    @Column(name = "cardholder_name")
     private String cardholderName;
 
     @Column(name = "card_number")
@@ -16,6 +23,4 @@ public class PaymentInformation {
 
     @Column(name = "cvv")
     private String cvv;
-
-
 }
