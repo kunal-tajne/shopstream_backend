@@ -24,7 +24,7 @@ import java.util.Date;
             return jwt;
         }
 
-        public String getEmaillFromToken(String jwt)
+        public String getEmailFromToken(String jwt)
         {
             jwt = jwt.substring(7);
 
