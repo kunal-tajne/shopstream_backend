@@ -1,7 +1,7 @@
 package com.shopstream.user.domain;
 
 public enum OrderStatus {
-    PENDING,
+	PENDING,
     PLACED,
     CONFIRMED,
     SHIPPED,

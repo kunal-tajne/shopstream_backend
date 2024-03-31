@@ -13,11 +13,13 @@ import com.shopstream.repository.UserRepository;
 import com.shopstream.user.domain.OrderStatus;
 import com.shopstream.user.domain.PaymentStatus;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class OrderServiceImplementation implements OrderService {
 
     private OrderRepository orderRepository;
