@@ -2,7 +2,7 @@ package com.shopstream.user.domain;
 
 public enum PaymentStatus {
 
-    PENDING,
+	PENDING,
     PROCESSING,
     COMPLETED,
     FAILED

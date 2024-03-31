@@ -7,10 +7,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class AuthResponse {
+public class PaymentLinkResponse {
 	
-	private String jwt;
-	
-	private boolean status;
-
+	private String payment_link_url;
+	private String payment_link_id;
 }
