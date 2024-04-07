@@ -1,6 +1,7 @@
 package com.shopstream.controller;
 
 import com.shopstream.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -32,6 +33,8 @@ public class AuthController {
 
 	private UserRepository userRepository;
 	private PasswordEncoder passwordEncoder;
+
+	@Autowired
 	private JwtTokenProvider jwtTokenProvider;
 	private CustomUserDetails customUserDetails;
 	private CartService cartService;
@@ -96,7 +99,7 @@ public class AuthController {
         
         
         String token = jwtTokenProvider.generateToken(authentication);
-        AuthResponse authResponse= new AuthResponse();
+        AuthResponse authResponse= new AuthResponse(token, true);
 		
 		authResponse.setStatus(true);
 		authResponse.setJwt(token);

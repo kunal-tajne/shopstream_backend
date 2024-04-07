@@ -7,19 +7,30 @@ import com.shopstream.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
+
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+@Service
 public class UserServiceImplementation implements UserService {
 
+    @Autowired
     private UserRepository userRepository;
+
+    @Autowired
     private JwtTokenProvider jwtTokenProvider;
+
+    public UserServiceImplementation(UserRepository userRepository,JwtTokenProvider jwtTokenProvider) {
+
+        this.userRepository=userRepository;
+        this.jwtTokenProvider=jwtTokenProvider;
+
+    }
 
     @Override
     public User findUserById(Long userId) throws UserException {
@@ -34,7 +45,7 @@ public class UserServiceImplementation implements UserService {
     @Override
     public User findUserProfileByJwt(String jwt) throws UserException {
         System.out.println("user service");
-        String email=jwtTokenProvider.getEmailFromToken(jwt);
+        String email=jwtTokenProvider.getEmailFromJwtToken(jwt);
 
         System.out.println("email"+email);
 
@@ -54,4 +65,3 @@ public class UserServiceImplementation implements UserService {
     }
 
 }
-

@@ -1,5 +1,6 @@
 package com.shopstream.model;
 
+import com.shopstream.user.domain.ProductCategory;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,13 +43,10 @@ public class Product {
     @Column(name = "color")
     private String color;
 
-    @ManyToMany
-    @JoinTable(
-            name = "product_sizes", // Name of the join table
-            joinColumns = @JoinColumn(name = "product_id"), // Column in the join table referencing the Product entity
-            inverseJoinColumns = @JoinColumn(name = "size_name") // Column in the join table referencing the Size entity
-    )
-    private Set<Size> sizes = new HashSet<>();
+    @Embedded
+    @ElementCollection
+    @Column(name = "sizes")
+    private Set<Size> sizes=new HashSet<>();
 
     @Column(name = "image_url")
     private String imageUrl;

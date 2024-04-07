@@ -1,5 +1,6 @@
 package com.shopstream.config;
 
+import com.shopstream.config.JwtTokenValidator;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,35 +22,55 @@ import java.util.Collections;
 public class AppConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception
-    {
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeHttpRequests(Authorize -> Authorize.requestMatchers("/api/**").authenticated().anyRequest().permitAll()).addFilterBefore(new JwtValidator(), BasicAuthenticationFilter.class).csrf().disable().cors().configurationSource(new CorsConfigurationSource() {
-            @Override
-            public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-                CorsConfiguration cfg = new CorsConfiguration();
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeHttpRequests(Authorize -> Authorize
+                        .requestMatchers("/api/**").authenticated()
+                        .anyRequest().permitAll()
+                )
+                .addFilterBefore(new JwtTokenValidator(), BasicAuthenticationFilter.class)
+                .csrf().disable()
+                .cors().configurationSource(new CorsConfigurationSource() {
 
-                cfg.setAllowedOrigins(Arrays.asList(
-                        "http://localhost:3000/",
-                        "http://localhost:4200/"
-                ));
-                cfg.setAllowedMethods(Collections.singletonList("*"));
-                cfg.setAllowCredentials(true);
-                cfg.setAllowedHeaders(Collections.singletonList("*"));
-                cfg.setExposedHeaders((Arrays.asList("Authorization")));
-                cfg.setMaxAge(3600L);
-                return cfg;
-            }
-        })
+                    @Override
+                    public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
 
-       .and().httpBasic().and().formLogin();
+                        CorsConfiguration cfg = new CorsConfiguration();
+
+                        cfg.setAllowedOrigins(Arrays.asList(
+
+                                        "http://localhost:3000",
+                                        "http://localhost:4000",
+                                        "http://localhost:4200",
+                                        "https://shopwithzosh.vercel.app",
+                                        "https://ecommerce-angular-blue.vercel.app/"
+
+                                )
+                        );
+                        //cfg.setAllowedMethods(Arrays.asList("GET", "POST","DELETE","PUT"));
+                        cfg.setAllowedMethods(Collections.singletonList("*"));
+                        cfg.setAllowCredentials(true);
+                        cfg.setAllowedHeaders(Collections.singletonList("*"));
+                        cfg.setExposedHeaders(Arrays.asList("Authorization"));
+                        cfg.setMaxAge(3600L);
+                        return cfg;
+
+                    }
+                })
+                .and()
+                .httpBasic()
+                .and()
+                .formLogin();
 
         return http.build();
+
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder ()
-    {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }
