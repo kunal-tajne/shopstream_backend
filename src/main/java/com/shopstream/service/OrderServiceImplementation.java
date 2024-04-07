@@ -15,6 +15,7 @@ import com.shopstream.user.domain.PaymentStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 @Service
 @AllArgsConstructor
@@ -22,10 +23,17 @@ import org.springframework.stereotype.Service;
 @Data
 public class OrderServiceImplementation implements OrderService {
 
+    @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
     private CartService cartService;
+
+    @Autowired
     private AddressRepository addressRepository;
+    @Autowired
     private UserRepository userRepository;
+    @Autowired
     private OrderItemRepository orderItemRepository;
 
     @Override

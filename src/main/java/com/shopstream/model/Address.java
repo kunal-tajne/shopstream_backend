@@ -39,5 +39,5 @@ public class Address {
     @JsonIgnore
     private User user;
 
-    private String mobile;
+    private String phoneNumber;
 }

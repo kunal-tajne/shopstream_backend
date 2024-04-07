@@ -37,4 +37,6 @@ public class CreateProductRequest {
     private String secondLevelCategory;
     private String thirdLevelCategory;
 
+    private String productCategory;
+
 }
