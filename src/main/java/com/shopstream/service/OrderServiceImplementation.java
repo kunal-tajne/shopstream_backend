@@ -40,8 +40,16 @@ public class OrderServiceImplementation implements OrderService {
     public Order createOrder(User user, Address shippAddress) {
 
         shippAddress.setUser(user);
-        Address address= addressRepository.save(shippAddress);
-        user.getAddresses().add(address);
+
+        Address existingAddress = addressRepository.findByAddressId(shippAddress.getId());
+
+        if (existingAddress == null) {
+            existingAddress = addressRepository.save(shippAddress);
+            user.getAddresses().add(existingAddress);
+        }
+
+//        Address address= addressRepository.save(shippAddress);
+//        user.getAddresses().add(address);
         userRepository.save(user);
 
         Cart cart=cartService.findUserCart(user.getId());
@@ -72,7 +80,7 @@ public class OrderServiceImplementation implements OrderService {
         createdOrder.setDiscount(cart.getDiscount());
         createdOrder.setTotalItem(cart.getTotalItem());
 
-        createdOrder.setShippingAddress(address);
+        createdOrder.setShippingAddress(existingAddress);
         createdOrder.setOrderDate(LocalDateTime.now());
         createdOrder.setOrderStatus(OrderStatus.PENDING);
         createdOrder.getPaymentDetails().setStatus(PaymentStatus.PENDING);

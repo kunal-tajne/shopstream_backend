@@ -65,7 +65,7 @@ public class PaymentController {
 		      // Create a JSON object with the payment link request parameters
 		      JSONObject paymentLinkRequest = new JSONObject();
 		      paymentLinkRequest.put("amount",order.getTotalPrice()* 100);
-		      paymentLinkRequest.put("currency","INR");    
+		      paymentLinkRequest.put("currency","USD");
 //		      paymentLinkRequest.put("expire_by",1691097057);
 //		      paymentLinkRequest.put("reference_id",order.getId().toString());
 		     
@@ -87,7 +87,7 @@ public class PaymentController {
 		      paymentLinkRequest.put("reminder_enable",true);
 
 		      // Set the callback URL and method
-		      paymentLinkRequest.put("callback_url","http://localhost:4200/payment-success?order_id="+orderId);
+		      paymentLinkRequest.put("callback_url","https://shopstream.vercel.app/payment/"+orderId);
 		      paymentLinkRequest.put("callback_method","get");
 
 		      // Create the payment link using the paymentLink.create() method
@@ -141,12 +141,12 @@ public class PaymentController {
 			System.out.println(order.getPaymentDetails().getStatus()+"payment status ");
 			orderRepository.save(order);
 		}
-		ApiResponse res=new ApiResponse("your order get placed", true);
+		ApiResponse res=new ApiResponse("your order is placed", true);
 	      return new ResponseEntity<ApiResponse>(res,HttpStatus.OK);
 	      
 	} catch (Exception e) {
 		System.out.println("errrr payment -------- ");
-		new RedirectView("https://shopwithshopstream.vercel.app/payment/failed");
+		new RedirectView("https://shopstream.vercel.app/payment/failed");
 		throw new RazorpayException(e.getMessage());
 	}
 
