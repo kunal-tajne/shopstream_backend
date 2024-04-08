@@ -44,8 +44,9 @@ public class AppConfig {
                                         "http://localhost:3000",
                                         "http://localhost:4000",
                                         "http://localhost:4200",
-                                        "https://shopstream.vercel.app",
-                                        "https://vercel.com/kunal-tajnes-projects/shopstream/FqtA9QV6FBLobspiXueW5XYeLg9M"
+                                        "https://shopstream.vercel.app","https://shopstream.vercel.app/",
+                                        "https://vercel.com/kunal-tajnes-projects/shopstream/FqtA9QV6FBLobspiXueW5XYeLg9M",
+                                        "https://shopstreambackend-production.up.railway.app/"
 
                                 )
                         );
