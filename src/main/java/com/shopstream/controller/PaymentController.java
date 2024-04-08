@@ -87,7 +87,7 @@ public class PaymentController {
 		      paymentLinkRequest.put("reminder_enable",true);
 
 		      // Set the callback URL and method
-		      paymentLinkRequest.put("callback_url","https://shopstream.vercel.app/payment/"+orderId);
+		      paymentLinkRequest.put("callback_url","https://shopstream-by-kunaltajne.vercel.app/payment/"+orderId);
 		      paymentLinkRequest.put("callback_method","get");
 
 		      // Create the payment link using the paymentLink.create() method
@@ -146,7 +146,7 @@ public class PaymentController {
 	      
 	} catch (Exception e) {
 		System.out.println("errrr payment -------- ");
-		new RedirectView("https://shopstream.vercel.app/payment/failed");
+		new RedirectView("https://shopstream-by-kunaltajne.vercel.app/payment/failed");
 		throw new RazorpayException(e.getMessage());
 	}
 
