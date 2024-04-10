@@ -13,7 +13,7 @@ public class HomeController {
 	@GetMapping("/")
 	public ResponseEntity<ApiResponse> homeController(){
 		
-		ApiResponse res=new ApiResponse("Welcome To E-Commerce System", true);
+		ApiResponse res=new ApiResponse("Welcome To ShopStream : Your one stop Shopping Destination", true);
 		
 		return new ResponseEntity<>(res,HttpStatus.OK);
 	}
